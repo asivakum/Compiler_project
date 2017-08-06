@@ -1,0 +1,18 @@
+PROGRAM expr
+BEGIN
+
+	INT a,b,c;
+
+	FUNCTION VOID main()
+	BEGIN
+		a := 10;
+
+		WRITE (a, newline);
+		a := a + 20;
+		WRITE (a, newline);
+		b := a * 5;
+		WRITE (b, newline);
+		c := (a+b)*(b-5)-(a+5+b+10)/a;
+		WRITE (a, newline);
+	END	
+END

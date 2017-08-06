@@ -1,0 +1,202 @@
+;IR code
+;LABEL factorial
+;LINK
+;STOREI 1 $T1
+;NEI $P1 $T1 label_1
+;STOREI 1 $T2
+;STOREI $T2 $T3
+;STOREI $T3 $R
+;RET
+;JUMP label_2
+;LABEL label_1
+;STOREI 1 $T4
+;SUBI $P1 $T4 $T5
+;PUSH
+;PUSH $T5
+;JSR factorial
+;POP
+;POP $T6
+;STOREI $T6 $L2
+;MULTI $L2 $P1 $T8
+;STOREI $T8 $L1
+;LABEL label_2
+;STOREI $L1 $T9
+;STOREI $T9 $R
+;RET
+;LABEL main
+;LINK
+;WRITES input
+;READI $L1
+;STOREI 1 $T1
+;NEI $L1 $T1 label_3
+;STOREI 1 $T2
+;STOREI $T2 $L2
+;LABEL label_3
+;STOREI 1 $T3
+;LEI $L1 $T3 label_5
+;PUSH
+;PUSH $L1
+;JSR factorial
+;POP
+;POP $T4
+;STOREI $T4 $L2
+;JUMP label_6
+;LABEL label_5
+;STOREI 0 $T6
+;STOREI $T6 $L2
+;LABEL label_6
+;WRITEI $L2
+;WRITES eol
+;STOREI 0 $T7
+;STOREI $T7 $T8
+;STOREI $T8 $R
+;RET
+;tiny code
+str input "Please enter an integer number: "
+str eol "\n"
+push
+push r0
+push r1
+push r2
+push r3
+push r4
+push r5
+push r6
+push r7
+push r8
+push r9
+push r10
+push r11
+push r12
+push r13
+push r14
+push r15
+push r16
+jsr main
+sys halt
+label factorial
+link 3
+move 1 r0
+cmpi $19 r0
+jne label_1
+move 1 r1
+move r1 r2
+move r2 $19
+unlnk
+ret
+jmp label_2
+label label_1
+move 1 r3
+move $19 r4
+subi r3 r4
+push
+push r4
+push r0
+push r1
+push r2
+push r3
+push r4
+push r5
+push r6
+push r7
+push r8
+push r9
+push r10
+push r11
+push r12
+push r13
+push r14
+push r15
+push r16
+jsr factorial
+pop r16
+pop r15
+pop r14
+pop r13
+pop r12
+pop r11
+pop r10
+pop r9
+pop r8
+pop r7
+pop r6
+pop r5
+pop r4
+pop r3
+pop r2
+pop r1
+pop
+pop r5
+move r5 $-2
+move $-2 r7
+muli $19 r7
+move r7 $-1
+label label_2
+move $-1 r8
+move r8 $19
+unlnk
+ret
+label main
+link 3
+sys writes input
+sys readi $-1
+move 1 r0
+cmpi $-1 r0
+jne label_3
+move 1 r1
+move r1 $-2
+label label_3
+move 1 r2
+cmpi $-1 r2
+jle label_5
+push
+push $-1
+push r0
+push r1
+push r2
+push r3
+push r4
+push r5
+push r6
+push r7
+push r8
+push r9
+push r10
+push r11
+push r12
+push r13
+push r14
+push r15
+push r16
+jsr factorial
+pop r16
+pop r15
+pop r14
+pop r13
+pop r12
+pop r11
+pop r10
+pop r9
+pop r8
+pop r7
+pop r6
+pop r5
+pop r4
+pop r3
+pop r2
+pop r1
+pop
+pop r3
+move r3 $-2
+jmp label_6
+label label_5
+move 0 r5
+move r5 $-2
+label label_6
+sys writei $-2
+sys writes eol
+move 0 r6
+move r6 r7
+move r7 $18
+unlnk
+ret

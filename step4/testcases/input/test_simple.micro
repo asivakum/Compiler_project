@@ -1,0 +1,15 @@
+PROGRAM expr
+BEGIN
+
+	INT a,b;
+
+	FUNCTION VOID main()
+	BEGIN
+		a := 10;
+
+		WRITE (a, newline);
+		a := a + 20;
+		WRITE (a, newline);
+		b := a * 5;
+	END	
+END

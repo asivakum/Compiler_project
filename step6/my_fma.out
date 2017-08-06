@@ -1,0 +1,168 @@
+;IR code
+;LABEL add
+;LINK
+;ADDF $P1 $P2 $T1
+;STOREF $T1 $L1
+;STOREF $L1 $T2
+;STOREF $T2 $R
+;RET
+;LABEL multiply
+;LINK
+;MULTF $P1 $P2 $T1
+;STOREF $T1 $L1
+;STOREF $L1 $T2
+;STOREF $T2 $R
+;RET
+;LABEL main
+;LINK
+;WRITES intro
+;WRITES first
+;READF $L3
+;WRITES second
+;READF $L2
+;WRITES third
+;READF $L1
+;PUSH
+;PUSH $L2
+;PUSH $L3
+;JSR multiply
+;POP
+;POP
+;POP $T1
+;STOREF $T1 $L4
+;PUSH
+;PUSH $L1
+;PUSH $L4
+;JSR add
+;POP
+;POP
+;POP $T3
+;STOREF $T3 $L5
+;WRITEF $L3
+;WRITES star
+;WRITEF $L2
+;WRITES plus
+;WRITEF $L1
+;WRITES equal
+;WRITEF $L5
+;WRITES eol
+;STOREI 0 $T5
+;STOREI $T5 $T6
+;STOREI $T6 $R
+;RET
+;tiny code
+str intro "You will be asked for three float numbers\n"
+str first "Please enter the first float number: "
+str second "Please enter the second float number: "
+str third "Please enter the third float number: "
+str eol "\n"
+str star "*"
+str plus "+"
+str equal "="
+push
+push r0
+push r1
+push r2
+push r3
+push r4
+push r5
+push r6
+push r7
+push r8
+push r9
+jsr main
+sys halt
+label add
+link 2
+move $12 r0
+addr $13 r0
+move r0 $-1
+move $-1 r1
+move r1 $13
+unlnk
+ret
+label multiply
+link 2
+move $12 r0
+mulr $13 r0
+move r0 $-1
+move $-1 r1
+move r1 $13
+unlnk
+ret
+label main
+link 6
+sys writes intro
+sys writes first
+sys readr $-3
+sys writes second
+sys readr $-2
+sys writes third
+sys readr $-1
+push
+push $-2
+push $-3
+push r0
+push r1
+push r2
+push r3
+push r4
+push r5
+push r6
+push r7
+push r8
+push r9
+jsr multiply
+pop r9
+pop r8
+pop r7
+pop r6
+pop r5
+pop r4
+pop r3
+pop r2
+pop r1
+pop
+pop
+pop r0
+move r0 $-4
+push
+push $-1
+push $-4
+push r0
+push r1
+push r2
+push r3
+push r4
+push r5
+push r6
+push r7
+push r8
+push r9
+jsr add
+pop r9
+pop r8
+pop r7
+pop r6
+pop r5
+pop r4
+pop r3
+pop r2
+pop r1
+pop
+pop
+pop r2
+move r2 $-5
+sys writer $-3
+sys writes star
+sys writer $-2
+sys writes plus
+sys writer $-1
+sys writes equal
+sys writer $-5
+sys writes eol
+move 0 r4
+move r4 r5
+move r5 $11
+unlnk
+ret

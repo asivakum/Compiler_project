@@ -1,0 +1,693 @@
+;IR code
+;LABEL factorial
+;LINK 
+;STOREI 0 $T1
+;NEF $P1 $T1 label1
+;STOREI 1 $T2
+;STOREI $T2 $T3
+;STOREI $T3 $R
+;RET
+;JUMP label2
+;LABEL label1
+;STOREI 1 $T4
+;SUBF $P1 $T4 $T5
+;PUSH 
+;PUSH $T5
+;JSR factorial
+;POP 
+;POP $T6
+;STOREF $T6 $L2
+;MULTF $L2 $P1 $T7
+;STOREF $T7 $L1
+;LABEL label2
+;STOREF $L1 $T8
+;STOREF $T8 $R
+;RET
+;LABEL exponential
+;LINK 
+;STOREF 1.0 $T1
+;STOREF $T1 $L1
+;LABEL label3
+;STOREI 0 $T2
+;LEF $P2 $T2 label4
+;MULTF $L1 $P1 $T3
+;STOREF $T3 $L1
+;STOREI 1 $T4
+;SUBF $P2 $T4 $T5
+;STOREF $T5 $P2
+;JUMP label3
+;LABEL label4
+;STOREF $L1 $T6
+;STOREF $T6 $R
+;RET
+;LABEL estPIGL
+;LINK 
+;STOREF 0.0 $T1
+;STOREF $T1 $L1
+;STOREF 1.0 $T2
+;STOREF $T2 $L2
+;STOREI 1 $T3
+;STOREF $T3 $L3
+;LABEL label5
+;GEF $L2 $P1 label6
+;STOREI 2 $T4
+;MULTI $T4 $L2 $T5
+;STOREI 1 $T6
+;SUBI $T5 $T6 $T7
+;DIVF $L3 $T7 $T8
+;ADDF $L1 $T8 $T9
+;STOREF $T9 $L1
+;STOREI 1 $T10
+;ADDF $L2 $T10 $T11
+;STOREF $T11 $L2
+;STOREI 0 $T12
+;SUBI $T12 $L3 $T13
+;STOREF $T13 $L3
+;JUMP label5
+;LABEL label6
+;STOREI 4 $T14
+;MULTI $T14 $L1 $T15
+;STOREI $T15 $T16
+;STOREI $T16 $R
+;RET
+;LABEL estPIEU
+;LINK 
+;STOREF 0.0 $T1
+;STOREF $T1 $L1
+;STOREF 0.0 $T2
+;STOREF $T2 $L2
+;LABEL label7
+;GEF $L2 $P1 label8
+;PUSH 
+;PUSH $L2
+;JSR factorial
+;POP 
+;POP $T3
+;STOREI 2 $T4
+;PUSH 
+;PUSH $T3
+;PUSH $T4
+;JSR exponential
+;POP 
+;POP 
+;POP $T5
+;STOREI 2 $T6
+;STOREI 1 $T7
+;ADDF $L2 $T7 $T8
+;PUSH 
+;PUSH $T6
+;PUSH $T8
+;JSR exponential
+;POP 
+;POP 
+;POP $T9
+;MULTF $T5 $T9 $T10
+;STOREI 2 $T11
+;MULTI $T11 $L2 $T12
+;STOREI 1 $T13
+;ADDI $T12 $T13 $T14
+;PUSH 
+;PUSH $T14
+;JSR factorial
+;POP 
+;POP $T15
+;DIVF $T10 $T15 $T16
+;ADDF $L1 $T16 $T17
+;STOREF $T17 $L1
+;STOREI 1 $T18
+;ADDF $L2 $T18 $T19
+;STOREF $T19 $L2
+;JUMP label7
+;LABEL label8
+;STOREF $L1 $T20
+;STOREF $T20 $R
+;RET
+;LABEL estPIGO
+;LINK 
+;STOREF 0.0 $T1
+;STOREF $T1 $L1
+;STOREF 0.0 $T2
+;STOREF $T2 $L2
+;LABEL label9
+;GEF $L2 $P1 label10
+;PUSH 
+;PUSH $L2
+;JSR factorial
+;POP 
+;POP $T3
+;STOREI 2 $T4
+;PUSH 
+;PUSH $T3
+;PUSH $T4
+;JSR exponential
+;POP 
+;POP 
+;POP $T5
+;STOREI 2 $T6
+;MULTI $T6 $L2 $T7
+;STOREI 1 $T8
+;ADDI $T7 $T8 $T9
+;PUSH 
+;PUSH $T9
+;JSR factorial
+;POP 
+;POP $T10
+;DIVF $T5 $T10 $T11
+;ADDF $L1 $T11 $T12
+;STOREF $T12 $L1
+;STOREI 1 $T13
+;ADDF $L2 $T13 $T14
+;STOREF $T14 $L2
+;JUMP label9
+;LABEL label10
+;MULTF gosperConst $L1 $T15
+;STOREF $T15 $T16
+;STOREF $T16 $R
+;RET
+;LABEL main
+;LINK 
+;STOREF 2.59808 $T1
+;STOREF $T1 gosperConst
+;WRITES intro
+;WRITES input1
+;READF $L1
+;PUSH 
+;PUSH $L1
+;JSR estPIGL
+;POP 
+;POP $T2
+;STOREF $T2 $L2
+;WRITEF $L2
+;WRITES eol
+;WRITES input2
+;READF $L1
+;PUSH 
+;PUSH $L1
+;JSR estPIEU
+;POP 
+;POP $T3
+;STOREF $T3 $L2
+;WRITEF $L2
+;WRITES eol
+;WRITES input3
+;READF $L1
+;PUSH 
+;PUSH $L1
+;JSR estPIGO
+;POP 
+;POP $T4
+;STOREF $T4 $L2
+;WRITEF $L2
+;WRITES eol
+;tiny code
+str intro "This program estimates pi based on\na few different algorithms.\n"
+str input1 "Enter the number of iterations for Gregory and Leibniz's (at least 1000): "
+str input2 "Enter the number of iterations for Euler's (MAX 19): "
+str input3 "Enter the number of iterations for Gosper's (MAX 21): "
+str eol "\n"
+var gosperConst
+push
+push r0
+push r1
+push r2
+push r3
+jsr main
+sys halt
+label factorial 
+link 22
+move $-3 r0
+move 0 r0
+move $6 r1
+cmpr r1 r0
+move r0 $-3
+move r1 $6
+jne label1
+move $-4 r0
+move 1 r0
+move $-5 r1
+move r0 r1
+move r1 $7
+unlnk
+ret
+jmp label2 
+label label1 
+move $-6 r0
+move 1 r0
+move $6 r1
+move $-7 r2
+move r1 r2
+subr r0 r2
+push
+push r2
+push r0
+push r1
+push r2
+push r3
+jsr factorial
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+move $-8 r0
+pop r0
+move $-2 r2
+move r0 r2
+move $-9 r0
+move r2 r0
+mulr r1 r0
+move $-1 r1
+move r0 r1
+move r1 $-1
+label label2 
+move $-1 r0
+move $-10 r1
+move r0 r1
+move r1 $7
+unlnk
+ret
+label exponential 
+link 21
+move $-2 r0
+move 1.0 r0
+move $-1 r1
+move r0 r1
+move r1 $-1
+label label3 
+move $-3 r0
+move 0 r0
+move $6 r1
+cmpr r1 r0
+move r0 $-3
+move r1 $6
+jle label4
+move $-1 r0
+move $-4 r1
+move r0 r1
+move $7 r2
+mulr r2 r1
+move $-1 r0
+move r1 r0
+move $-5 r1
+move 1 r1
+move $6 r3
+move r0 $-1
+move $-6 r0
+move r3 r0
+subr r1 r0
+move r0 $6
+move r2 $7
+jmp label3 
+label label4 
+move $-1 r0
+move $-7 r1
+move r0 r1
+move r1 $8
+unlnk
+ret
+label estPIGL 
+link 23
+move $-4 r0
+move 0.0 r0
+move $-1 r1
+move r0 r1
+move $-5 r0
+move 1.0 r0
+move $-2 r2
+move r0 r2
+move $-6 r0
+move 1 r0
+move $-3 r3
+move r0 r3
+move r1 $-1
+move r2 $-2
+move r3 $-3
+label label5 
+move $-2 r0
+move $6 r1
+cmpr r0 r1
+move r0 $-2
+move r1 $6
+jge label6
+move $-7 r0
+move 2 r0
+move $-8 r1
+move r0 r1
+move $-2 r2
+muli r2 r1
+move $-9 r0
+move 1 r0
+move $-10 r3
+move r1 r3
+subi r0 r3
+move $-3 r0
+move $-11 r1
+move r0 r1
+divr r3 r1
+move $-1 r3
+move r0 $-3
+move $-12 r0
+move r3 r0
+addr r1 r0
+move $-1 r1
+move r0 r1
+move $-13 r0
+move 1 r0
+move $-14 r3
+move r2 r3
+addr r0 r3
+move $-2 r0
+move r3 r0
+move $-15 r2
+move 0 r2
+move $-16 r3
+move r2 r3
+move r0 $-2
+move $-3 r0
+subi r0 r3
+move $-3 r0
+move r3 r0
+move r0 $-3
+move r1 $-1
+jmp label5 
+label label6 
+move $-17 r0
+move 4 r0
+move $-18 r1
+move r0 r1
+move $-1 r2
+muli r2 r1
+move $-19 r0
+move r1 r0
+move r0 $7
+unlnk
+ret
+label estPIEU 
+link 22
+move $-3 r0
+move 0.0 r0
+move $-1 r1
+move r0 r1
+move $-4 r0
+move 0.0 r0
+move $-2 r2
+move r0 r2
+move r1 $-1
+move r2 $-2
+label label7 
+move $-2 r0
+move $6 r1
+cmpr r0 r1
+move r0 $-2
+move r1 $6
+jge label8
+push
+move $-2 r0
+push r0
+push r0
+push r1
+push r2
+push r3
+jsr factorial
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+move $-5 r1
+pop r1
+move $-6 r2
+move 2 r2
+push
+push r1
+push r2
+push r0
+push r1
+push r2
+push r3
+jsr exponential
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+pop
+move $-7 r1
+pop r1
+move $-8 r2
+move 2 r2
+move $-9 r3
+move 1 r3
+move r1 $-7
+move $-10 r1
+move r0 r1
+addr r3 r1
+push
+push r2
+push r1
+push r0
+push r1
+push r2
+push r3
+jsr exponential
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+pop
+move $-11 r1
+pop r1
+move $-7 r2
+move $-12 r3
+move r2 r3
+mulr r1 r3
+move $-13 r1
+move 2 r1
+move $-14 r2
+move r1 r2
+muli r0 r2
+move $-15 r1
+move 1 r1
+move r0 $-2
+move $-16 r0
+move r2 r0
+addi r1 r0
+push
+push r0
+push r0
+push r1
+push r2
+push r3
+jsr factorial
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+move $-17 r0
+pop r0
+move $-18 r1
+move r3 r1
+divr r0 r1
+move $-1 r0
+move $-19 r2
+move r0 r2
+addr r1 r2
+move $-1 r0
+move r2 r0
+move $-20 r1
+move 1 r1
+move $-2 r2
+move $-21 r3
+move r2 r3
+addr r1 r3
+move $-2 r1
+move r3 r1
+move r0 $-1
+move r1 $-2
+jmp label7 
+label label8 
+move $-1 r0
+move $-22 r1
+move r0 r1
+move r1 $7
+unlnk
+ret
+label estPIGO 
+link 22
+move $-3 r0
+move 0.0 r0
+move $-1 r1
+move r0 r1
+move $-4 r0
+move 0.0 r0
+move $-2 r2
+move r0 r2
+move r1 $-1
+move r2 $-2
+label label9 
+move $-2 r0
+move $6 r1
+cmpr r0 r1
+move r0 $-2
+move r1 $6
+jge label10
+push
+move $-2 r0
+push r0
+push r0
+push r1
+push r2
+push r3
+jsr factorial
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+move $-5 r1
+pop r1
+move $-6 r2
+move 2 r2
+push
+push r1
+push r2
+push r0
+push r1
+push r2
+push r3
+jsr exponential
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+pop
+move $-7 r1
+pop r1
+move $-8 r2
+move 2 r2
+move $-9 r3
+move r2 r3
+muli r0 r3
+move $-10 r2
+move 1 r2
+move r0 $-2
+move $-11 r0
+move r3 r0
+addi r2 r0
+push
+push r0
+push r0
+push r1
+push r2
+push r3
+jsr factorial
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+move $-12 r0
+pop r0
+move $-13 r2
+move r1 r2
+divr r0 r2
+move $-1 r0
+move $-14 r1
+move r0 r1
+addr r2 r1
+move $-1 r0
+move r1 r0
+move $-15 r1
+move 1 r1
+move $-2 r2
+move $-16 r3
+move r2 r3
+addr r1 r3
+move $-2 r1
+move r3 r1
+move r0 $-1
+move r1 $-2
+jmp label9 
+label label10 
+move $-17 r0
+move gosperConst r0
+move $-1 r1
+mulr r1 r0
+move $-18 r1
+move r0 r1
+move r1 $7
+unlnk
+ret
+label main 
+link 22
+move $-3 r0
+move 2.59808 r0
+move r0 gosperConst
+sys writes intro
+sys writes input1
+move $-1 r0
+sys readr r0 
+push
+push r0
+push r0
+push r1
+push r2
+push r3
+jsr estPIGL
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+move $-4 r0
+pop r0
+move $-2 r1
+move r0 r1
+sys writer r1 
+sys writes eol
+sys writes input2
+move $-1 r0
+sys readr r0 
+push
+push r0
+push r0
+push r1
+push r2
+push r3
+jsr estPIEU
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+move $-5 r0
+pop r0
+move $-2 r1
+move r0 r1
+sys writer r1 
+sys writes eol
+sys writes input3
+move $-1 r0
+sys readr r0 
+push
+push r0
+push r0
+push r1
+push r2
+push r3
+jsr estPIGO
+pop r3
+pop r2
+pop r1
+pop r0
+pop
+move $-6 r0
+pop r0
+move $-2 r1
+move r0 r1
+sys writer r1 
+sys writes eol
+end

@@ -1,0 +1,14 @@
+PROGRAM p
+BEGIN
+	INT a, b, c, ddd, d, e,f;
+	FLOAT xxx;
+	FUNCTION VOID main()
+	BEGIN
+		a := 1;
+		b := 2;
+		xxx := 0.9;
+                c := c + a*b + (a*b+c)/a + 20;
+		ddd := a - b + c / (d - e * f);
+ 
+	END
+END
